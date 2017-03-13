@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "laravel/laravel54",
+    "description": "Mini Carrot Project.",
     "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "license": "proprietary",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
