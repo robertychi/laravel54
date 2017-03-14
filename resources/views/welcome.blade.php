@@ -33,6 +33,5 @@
 {{--<script src="{{ url('plugins/AdminLTE/dist/js/app.js') }}"></script>--}}
 
 
-
 </body>
 </html>
