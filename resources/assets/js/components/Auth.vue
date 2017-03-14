@@ -3,7 +3,7 @@
 <!-- template -->
 <template lang="pug">
     div
-        h1 hello my PUG
+        router-view
 </template>
 <!-- script -->
 <script type="es6">
