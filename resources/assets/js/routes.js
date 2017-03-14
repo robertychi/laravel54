@@ -60,7 +60,7 @@ export const routes =[
         { path: 'examples-blank-page', component: ExamplesBlankPage }
     ]},
     /* Path Auth page*/
-    { path: '/auth' , component: Auth , children:[
+    { path: '/oauth' , component: Auth , children:[
         { path: 'login', component: Login },
         { path: 'register', component: Register}
     ]},

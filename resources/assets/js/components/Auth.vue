@@ -1,9 +1,11 @@
 <!-- 主要程式命名: FileName.vue-->
 <!-- 副要程式命名: SubName.vue -->
 <!-- template -->
-<template lang="pug">
-    div
-        router-view
+<template>
+    <div>
+        <router-view></router-view>
+    </div>
+
 </template>
 <!-- script -->
 <script type="es6">
