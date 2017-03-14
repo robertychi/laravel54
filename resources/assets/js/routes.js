@@ -1,6 +1,7 @@
 /* routes root */
 import Landing from './components/Landing.vue'
 import Dashboard from './components/Dashboard.vue'
+import Auth from './components/Auth.vue'
 
 /* Landing Page */
 import Index from  './components/landing/Index.vue'
@@ -13,6 +14,25 @@ import Contact from './components/landing/Contact.vue'
 import DashboardIndex from './components/dashboard/Index.vue'
 import DashboardIndex2 from './components/dashboard/Index2.vue'
 import DashboardIndex3 from './components/dashboard/Index3.vue'
+
+/* Auth Page */
+import Login from './components/auth/Login.vue'
+import Register from './components/auth/Register.vue'
+
+/**
+    ** components:{} **
+    components: {
+        appRegister: Register
+    },
+    ** Html **
+    <app-register></app-register>
+    ** pug **
+    app-register
+    ** routes.js **
+    { path: '/register', component: Register },
+*/
+
+
 
 /* AdminLTE */
 import ExamplesBlankPage from './components/dashboard/al/examples/BlankPage.vue'
@@ -39,7 +59,11 @@ export const routes =[
         /* AdminLTE*/
         { path: 'examples-blank-page', component: ExamplesBlankPage }
     ]},
-
+    /* Path Auth page*/
+    { path: '/auth' , component: Auth , children:[
+        { path: 'login', component: Login },
+        { path: 'register', component: Register}
+    ]},
 
 
     /* Path 404 page*/
