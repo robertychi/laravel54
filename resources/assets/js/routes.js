@@ -19,53 +19,68 @@ import DashboardIndex3 from './components/dashboard/Index3.vue'
 import Login from './components/auth/Login.vue'
 import Register from './components/auth/Register.vue'
 
-/**
-    ** components:{} **
-    components: {
-        appRegister: Register
-    },
-    ** Html **
-    <app-register></app-register>
-    ** pug **
-    app-register
-    ** routes.js **
-    { path: '/register', component: Register },
-*/
-
-
-
 /* AdminLTE */
 import ExamplesBlankPage from './components/dashboard/al/examples/BlankPage.vue'
-
 
 
 /* 404 */
 import NotFound from './components/NotFound.vue'
 
-export const routes =[
+export const routes = [
     /* Path Landing page*/
-    { path: '' , component: Landing ,children:[
-        { path: '' , component: Index, name: 'landing '},
-        { path: 'about' , component: About , name: 'about'},
-        { path: 'document', component: Document, name: 'document' },
-        { path: 'product', component: Product, name: 'product' },
-        { path: 'contact', component: Contact, name: 'contact '}
-    ]},
+    {
+        path     : '',
+        component: Landing,
+        meta:{
+
+        },
+        children : [
+            {path: '', component: Index, name: 'landing '},
+            {path: 'about', component: About, name: 'about'},
+            {path: 'document', component: Document, name: 'document'},
+            {path: 'product', component: Product, name: 'product'},
+            {path: 'contact', component: Contact, name: 'contact '}
+        ]
+    },
     /* Path Dashboard page*/
-    { path: '/dashboard' , component: Dashboard , children:[
-        { path: '' , component: DashboardIndex },
-        { path: 'v2' , component: DashboardIndex2 },
-        { path: 'v3' , component: DashboardIndex3 },
-        /* AdminLTE*/
-        { path: 'examples-blank-page', component: ExamplesBlankPage }
-    ]},
+    {
+        path     : '/dashboard',
+        component: Dashboard,
+        meta:{
+            forAuth : true
+        },
+        children : [
+            {path: '', component: DashboardIndex},
+            {path: 'v2', component: DashboardIndex2},
+            {path: 'v3', component: DashboardIndex3},
+            /* AdminLTE*/
+            {path: 'examples-blank-page', component: ExamplesBlankPage}
+        ]
+    },
     /* Path Auth page*/
-    { path: '/oauth' , component: Auth , children:[
-        { path: 'login', component: Login },
-        { path: 'register', component: Register}
-    ]},
+    {
+        path     : '/oauth',
+        component: Auth,
+        meta     : {
+            forVisitors: true
+        },
+        children : [
+            {
+                path     : 'login',
+                component: Login
+            },
+            {
+                path     : 'register',
+                component: Register,
+            }
+        ]
+    },
+
 
 
     /* Path 404 page*/
-    {path: '*', component: NotFound}   //404
+    {
+        path     : '*',
+        component: NotFound
+    }
 ];

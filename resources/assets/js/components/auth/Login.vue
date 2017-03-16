@@ -78,13 +78,14 @@
                     password: this.password
                 }
 
-
-                // function name rule: myNameMethods()
-                console.log('login');
                 axios.post('/oauth/token', data)
                         .then(response => {
-                            console.log(response);
-                        });
+                            this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now())
+                            this.$router.push('/dashboard')
+                        })
+                        .catch(error => {
+
+                });
 
 
 

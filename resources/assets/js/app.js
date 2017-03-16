@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -15,6 +14,7 @@ require('./bootstrap');
 
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import Auth from './package/auth/auth.js'
 
 
 import { routes } from './routes'
@@ -25,13 +25,37 @@ const router = new VueRouter({
     mode: 'history'
 });
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
+Vue.use(Auth)
 
+
+router.beforeEach((to, from, next) => {
+    //頁面進入管控
+    //取 routes.js 的 meta 值
+
+    if (to.matched.some(record => record.meta.forVisitors)) {
+        // 判斷是否為登入，如登入不再訪問該頁面
+        if (Vue.auth.isAuthenticated()) {
+            next({
+                path: '/dashboard'
+            })
+        } else next()
+    }
+    else if (to.matched.some(record => record.meta.forAuth)) {
+        // 判斷是否為登入，未登入轉入login 頁面
+        if ( ! Vue.auth.isAuthenticated()) {
+            next({
+                path: '/oauth/login'
+            })
+        } else next()
+    }
+    else next()
+})
 
 //Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
 const app = new Vue({
-    el: '#app',
+    el    : '#app',
     router,
     render: h => h(App)
 });
