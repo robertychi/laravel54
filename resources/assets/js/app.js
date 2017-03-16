@@ -14,6 +14,7 @@ require('./bootstrap');
 
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import VeeValidate from 'vee-validate'
 import Auth from './package/auth/auth.js'
 
 
@@ -26,6 +27,7 @@ const router = new VueRouter({
 });
 
 Vue.use(VueRouter)
+Vue.use(VeeValidate)
 Vue.use(Auth)
 
 

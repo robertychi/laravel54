@@ -170,10 +170,12 @@ function copyToPublic() {
     mix.copy(npmDir + 'font-awesome/css/font-awesome.min.css', publicCssDir);
     mix.copy(npmDir + 'font-awesome/fonts', publicFontDir);
 
-    /* ionicons */
-    mix.copy(npmDir + 'ionicons/dist/css/ionicons.min.css', publicCssDir);
-    mix.copy(npmDir + 'ionicons/dist/css/ionicons.min.css.map', publicCssDir);
-    mix.copy(npmDir + 'ionicons/dist/fonts', publicFontDir);
+    /* ionicons
+    *  npm 的板本有問題，所以獨立下載執行，此處不再 copy
+    * */
+//    mix.copy(npmDir + 'ionicons/dist/css/ionicons.min.css', publicCssDir);
+//    mix.copy(npmDir + 'ionicons/dist/css/ionicons.min.css.map', publicCssDir);
+//    mix.copy(npmDir + 'ionicons/dist/fonts', publicFontDir);
 
     /* animate.css */
     mix.copy(npmDir + 'animate.css/animate.min.css', publicCssDir);

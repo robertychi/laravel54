@@ -1,20 +1,23 @@
 <!-- template -->
-<template lang="pug">
-    div
-        h1 這是首頁
-        p 我要開始做的了 {{ msg }}
+<template>
+    <div>
+        <h1>這是首頁</h1>
+        <p>我要開始做的了 </p>
+    </div>
+
+
 </template>
 
 <!-- script -->
 <script type="es6">
     export default{
         data(){
-            return{
-                msg:'hello vue'
+            return {
+                titleName: '首頁'
             }
         },
-        components:{
-           
+        mounted(){
+            document.title = this.titleName
         }
     }
 </script>

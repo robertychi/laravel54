@@ -11,10 +11,11 @@
     <title>Welcome</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ url('css/app.css') }}">
-    <link rel="stylesheet" href="{{ url('css/animate.min.css') }}">
-    <link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ url('css/ionicons.min.css') }}">
+    {{--<link rel="stylesheet" href="{{ url('css/app.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ url('css/animate.min.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}">--}}
+    {{--<link rel="stylesheet" href="{{ url('plugins/ionicons/css/ionicons.min.css') }}">--}}
+
 
 
 </head>

@@ -14,7 +14,7 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <router-link to="/" tag="li" active-class="active" exact><a>Home</a></router-link>
+                        <router-link to="/" tag="li" active-class="active" exact><a>首頁</a></router-link>
                         <router-link to="/document" tag="li" active-class="active"><a>文件</a></router-link>
                         <router-link to="/about" tag="li" active-class="active"><a>關於我們</a></router-link>
                         <router-link to="/product" tag="li" active-class="active"><a>產品介紹</a></router-link>
@@ -26,7 +26,7 @@
                                 to="/oauth/login"
                                 tag="li"
                                 v-if="!isAuth">
-                                <a>Login</a>
+                            <a>Login</a>
                         </router-link>
                         <li v-if="isAuth">
                             <a href="#" @click="logout">Logout</a>

@@ -9,12 +9,12 @@
 <script type="es6">
     export default{
         data(){
-            return{
-                msg:'hello vue'
+            return {
+                titleName: '聯絡我們'
             }
         },
-        components:{
-           
+        mounted(){
+            document.title = this.titleName
         }
     }
 </script>
