@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
     //頁面進入管控
     //取 routes.js 的 meta 值
 
-    if (to.matched.some(record => record.meta.forVisitors)) {
+    if (to.matched.some(record => record.meta.checkLogin)) {
         // 判斷是否為登入，如登入不再訪問該頁面
         if (Vue.auth.isAuthenticated()) {
             next({
@@ -43,7 +43,7 @@ router.beforeEach((to, from, next) => {
             })
         } else next()
     }
-    else if (to.matched.some(record => record.meta.forAuth)) {
+    else if (to.matched.some(record => record.meta.isAuth)) {
         // 判斷是否為登入，未登入轉入login 頁面
         if ( ! Vue.auth.isAuthenticated()) {
             next({

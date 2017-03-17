@@ -29,15 +29,8 @@
                                 <span class="hidden-xs"> 產品</span>
                             </a>
                         </router-link>
-                        <router-link to="/team" tag="li" active-class="active">
-                            <a title="團隊">
-                                <i class="fa fa-group"></i>
-                                <span class="hidden-xs"> 團隊
-                                </span>
-                            </a>
-                        </router-link>
-                        <router-link to="/dashboard" tag="li" active-class="active"
-                                     v-if="isAuth">
+
+                        <router-link to="/dashboard" tag="li" active-class="active">
                             <a title="進入系統">
                                 <i class="fa fa-tachometer"></i>
                                 <span class="hidden-xs"> 系統
@@ -45,110 +38,11 @@
                             </a>
                         </router-link>
 
-                        <!-- User Account: style can be found in dropdown.less(!isAuth)-->
-                        <li class="dropdown user user-menu"
-                            v-if="!isAuth">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="/img/guest1-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">訪客</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="/img/guest1-160x160.jpg" class="img-circle" alt="User Image">
-                                    <p>
-                                        訪客
-                                        <small>歡迎加入</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#"><i class="fa fa-facebook"></i> FB專頁</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#"><i class="fa fa-twitter"></i> Twitter</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <router-link to="/team">
-                                                <a title="團隊">
-                                                    <i class="fa fa-group"></i>
-                                                    <span class="hidden-xs"> 團隊
-                                                    </span>
-                                                </a>
-                                            </router-link>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">
-                                            <i class="fa fa-pencil"></i> 註冊
-                                        </a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <router-link to="/oauth/login">
-                                            <a class="btn btn-default btn-flat">
-                                                <i class="fa fa-sign-in"></i> 登入
-                                            </a>
-                                        </router-link>
-                                    </div>
+                        <!-- Parts: dropdown-users -->
+                        <app-dropdown-users></app-dropdown-users>
 
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- User Account: style can be found in dropdown.less (isAuth)-->
-                        <li class="dropdown user user-menu"
-                            v-if="isAuth">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">林政源</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="/img/guest1-160x160.jpg" class="img-circle" alt="User Image">
-                                    <p>
-                                        林政源 - 瑜誠工業
-                                        <small>員工 2017/03/12</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">
-                                            <i class="fa fa-info"></i> 詳細
-                                        </a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat"
-                                           @click="logout">
-                                            <i class="fa fa-sign-out"></i> 登出
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- language -->
-                        <app-dropdown-language></app-dropdown-language>
+                        <!-- Parts: dropdown-languages -->
+                        <app-dropdown-languages></app-dropdown-languages>
 
                     </ul>
                 </div>
@@ -157,21 +51,8 @@
     </div>
 </template>
 <script type="es6">
-    import DropdownLanguage from '../../parts/_dropdownLanguage.vue'
-    /**
-        ** components:{} **
-        components: {
-            appDropdownLanguage: DropdownLanguage
-        },
-        ** Html **
-        <app-dropdown-language></app-dropdown-language>
-        ** pug **
-        app-dropdown-language
-        ** routes.js **
-        { path: '/dropdown-language', component: DropdownLanguage },
-    */
-
-
+    import DropdownLanguages from '../../parts/_dropdownLanguages.vue'
+    import DropdownUsers from '../../parts/_dropdownUsers.vue'
 
     export default{
         data(){
@@ -180,7 +61,8 @@
             }
         },
         components: {
-            appDropdownLanguage: DropdownLanguage
+            appDropdownLanguages: DropdownLanguages,
+            appDropdownUsers: DropdownUsers
         },
         methods   : {
             logout(){

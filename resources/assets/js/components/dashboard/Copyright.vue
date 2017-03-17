@@ -1,11 +1,11 @@
-<!-- 主要程式命名: FileName.vue-->
-<!-- 副要程式命名: SubName.vue -->
+<!-- 主要組件命名: FileName.vue-->
+<!-- 副要組件命名: SubName.vue -->
+<!-- 零件組件命名: _dropdownName.vue -->
 <!-- template -->
 <template>
     <div>
-        <router-view></router-view>
+        <h1> Hi {{myMessage}}</h1>
     </div>
-
 </template>
 <!-- script -->
 <script type="es6">
@@ -15,6 +15,7 @@
                 //myData : 'xxx',
                 //myArray: [],
                 //myObj  : [{id: '1',name:'rob'},{id: '2',name:'tom'}]
+                myMessage: 'Vue.js'
             }
         },
         components: {
@@ -22,13 +23,8 @@
         },
         methods:{
         
-        },
-        created(){
-            $('body').addClass('login-page')
-
         }
     }
-
 </script>
 
 <!-- style -->

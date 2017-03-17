@@ -40,6 +40,7 @@ export const routes = [
             {path: 'document', component: Document, name: 'document'},
             {path: 'product', component: Product, name: 'product'},
             {path: 'contact', component: Contact, name: 'contact '}
+
         ]
     },
     /* Path Dashboard page*/
@@ -47,7 +48,7 @@ export const routes = [
         path     : '/dashboard',
         component: Dashboard,
         meta:{
-            forAuth : true
+            isAuth : true
         },
         children : [
             {path: '', component: DashboardIndex},
@@ -62,7 +63,7 @@ export const routes = [
         path     : '/oauth',
         component: Auth,
         meta     : {
-            forVisitors: true
+            checkLogin: true
         },
         children : [
             {

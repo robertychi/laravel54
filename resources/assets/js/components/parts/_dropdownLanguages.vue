@@ -6,10 +6,10 @@
     <li class="dropdown notifications-menu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="語言">
             <i class="fa fa-language"></i>
-            <!--<span class="label label-warning">10</span>-->
+            <span class="label label-warning">1</span>
         </a>
         <ul class="dropdown-menu">
-            <li class="header">語言</li>
+            <li class="header">有 1 個語系</li>
             <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
@@ -21,7 +21,7 @@
 
                 </ul>
             </li>
-            <!--<li class="footer"><a href="#">View all</a></li>-->
+            <li class="footer"><a href="#">View all</a></li>
         </ul>
     </li>
 </template>

@@ -18,58 +18,25 @@
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
+                        <!-- Parts: dropdown-messages-->
                         <app-dropdown-messages></app-dropdown-messages>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <app-dropdown-notifications></app-dropdown-notifications>
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <app-dropdown-tasks></app-dropdown-tasks>
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                                    <p>
-                                        Alexander Pierce - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
+                        <!-- Parts: dropdown-notifications-->
+                        <app-dropdown-notifications></app-dropdown-notifications>
+
+                        <!-- Parts: dropdown-tasks-->
+                        <app-dropdown-tasks></app-dropdown-tasks>
+
+                        <!-- Parts: dropdown-users-->
+                        <app-dropdown-users></app-dropdown-users>
+
+                        <!-- Parts: dropdown-languages -->
+                        <app-dropdown-languages></app-dropdown-languages>
+
                         <!-- Control Sidebar Toggle Button -->
-                        <li>
-                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
+                        <!--<li>-->
+                            <!--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
+                        <!--</li>-->
                     </ul>
                 </div>
             </nav>
@@ -79,9 +46,12 @@
 
 <!-- script -->
 <script type="es6">
-    import DropdownMessages from './_dropdownMessages.vue'
-    import DropdownNotifications from './_dropdownNotifications.vue'
-    import DropdownTasks from './_dropdownTasks.vue'
+    import DropdownMessages from '../../parts/_dropdownMessages.vue'
+    import DropdownNotifications from '../../parts/_dropdownNotifications.vue'
+    import DropdownTasks from '../../parts/_dropdownTasks.vue'
+    import DropdownLanguages from '../../parts/_dropdownLanguages.vue'
+    import DropdownUsers from '../../parts/_dropdownUsers.vue'
+
 
     export default {
         data() {
@@ -92,7 +62,9 @@
         components: {
             appDropdownMessages: DropdownMessages,
             appDropdownNotifications: DropdownNotifications,
-            appDropdownTasks: DropdownTasks
+            appDropdownTasks: DropdownTasks,
+            appDropdownLanguages: DropdownLanguages,
+            appDropdownUsers: DropdownUsers
         },
         methods   : {}
     }

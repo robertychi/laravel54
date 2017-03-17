@@ -3,7 +3,7 @@
     <div>
         <div class="register-box">
             <div class="register-logo">
-                <a href="../../index2.html"><b>Admin</b>LTE</a>
+                <a href="../../index2.html"><b>Mini</b>Business</a>
             </div>
 
             <div class="register-box-body">
