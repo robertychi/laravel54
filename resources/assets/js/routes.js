@@ -5,7 +5,7 @@ import Auth from './components/Auth.vue'
 
 /* Landing Page */
 import Index from  './components/landing/Index.vue'
-import About from  './components/landing/About.vue'
+import Team from  './components/landing/Team.vue'
 import Document from './components/landing/Document.vue'
 import Product from './components/landing/Product.vue'
 import Contact from './components/landing/Contact.vue'
@@ -36,7 +36,7 @@ export const routes = [
         },
         children : [
             {path: '', component: Index, name: 'landing '},
-            {path: 'about', component: About, name: 'about'},
+            {path: 'team', component: Team, name: 'team'},
             {path: 'document', component: Document, name: 'document'},
             {path: 'product', component: Product, name: 'product'},
             {path: 'contact', component: Contact, name: 'contact '}

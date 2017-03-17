@@ -13,7 +13,6 @@ export const adminlteMixin = {
     mounted(){
         this.getDomVal();
         this.fixRouterLink();
-
     },
     methods: {
         /* 取得 Dom 值*/

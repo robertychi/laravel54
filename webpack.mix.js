@@ -50,7 +50,7 @@ switch(npmNodeEnv){
             //npm run watch
             //console.log('watch');
             logWatch();
-            lessToCss();
+//            lessToCss();
             vueApp();
             webpackfunction();
         }else{

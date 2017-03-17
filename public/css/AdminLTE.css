@@ -94,7 +94,7 @@ body {
 .content-wrapper,
 .right-side {
   min-height: 100%;
-  background-color: #fff;
+  background-color: #ecf0f5;
   z-index: 800;
 }
 .main-footer {
@@ -164,14 +164,14 @@ h6,
 }
 /* General Links */
 a {
-  color: #337ab7;
+  color: #3c8dbc;
 }
 a:hover,
 a:active,
 a:focus {
   outline: none;
   text-decoration: none;
-  color: #23527c;
+  color: #72afd2;
 }
 /* Page Header */
 .page-header {

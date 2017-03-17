@@ -3,7 +3,7 @@
     <div>
         <div class="login-box">
             <div class="login-logo">
-                <router-link to="/"><a><b>Mini</b>Carrot</a></router-link>
+                <router-link to="/"><a><b>Mini</b>Business</a></router-link>
 
             </div>
             <!-- /.login-logo -->
@@ -48,7 +48,8 @@
                     <!-- /.col -->
                     <div class="col-xs-4">
                         <button class="btn btn-primary btn-block btn-flat"
-                                @click="login">登入
+                                @click="login">
+                            <i class="fa fa-sign-in"></i> 登入
                         </button>
                     </div>
                     <!-- /.col -->
@@ -68,13 +69,13 @@
 
                 <a href="#"
                    :class="{'text-danger': isError }">
-                    <span class="fa fa-flag-o"></span> 忘記密碼？</a>
+                    <i class="fa fa-question-circle-o"></i> 忘記密碼？</a>
                 <br>
 
-                <a href="register.html" class="text-center"><span class="fa fa-registered"></span> 註冊</a>
+                <a href="register.html" class="text-center"><i class="fa fa-registered"></i> 註冊</a>
                 <br>
 
-                <router-link to="/"><span class="fa fa-home"></span> 回首頁</router-link>
+                <router-link to="/"><i class="fa fa-home"></i> 回首頁</router-link>
             </div>
             <!-- /.login-box-body -->
         </div>

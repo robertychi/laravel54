@@ -51,7 +51,5 @@
     }
 </script>
 <style lang="stylus" scoped>
-    /* AdminLTE Css*/
-    @import "/css/AdminLTE.css"
-    @import "/css/AdminLTE.all-skins.css"
+
 </style>

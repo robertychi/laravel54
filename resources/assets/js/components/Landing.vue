@@ -1,20 +1,19 @@
 <!-- template -->
-<template lang="pug">
-    div.body
-        app-header
-        router-view
-
-
+<template>
+    <div class="body">
+        <app-header></app-header>
+        <router-view></router-view>
+    </div>
 </template>
 
 <!-- script -->
 <script type="es6">
-    import Header from './landing/header.vue'
+    import Header from './landing/layout/header.vue'
 
     export default{
         data(){
             return {
-                msg: 'hello vue'
+                msg: 'hello vue '
             }
         },
         components: {
@@ -23,8 +22,5 @@
     }
 </script>
 <style lang="stylus" scoped>
-    .body
-        padding-top 40px
-    h1
-        color red
+
 </style>
