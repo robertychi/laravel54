@@ -15911,8 +15911,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
@@ -15924,11 +15922,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     components: {},
     methods: {
+        /* 登出 */
         logout: function logout() {
             //console.log('logout');
             this.$auth.destroyToken();
             this.$router.push('/oauth/login');
         },
+
+        /* 取出及設定使用者資訊 */
         setAuthenticatedUser: function setAuthenticatedUser() {
             var self = this;
             axios.get('/api/user').then(function (response) {
@@ -15942,14 +15943,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         console.log('4:parts|dropdownUser');
+        /* 判斷是否為使用者 */
         if (Vue.auth.isAuthenticated()) {
             this.isAuth = true;
+            this.setAuthenticatedUser();
         } else {
             this.isAuth = false;
         }
-        if (this.isAuth) {
-            this.setAuthenticatedUser();
-        }
+        if (this.isAuth) {}
     },
     mounted: function mounted() {}
 };
@@ -16068,7 +16069,7 @@ window.axios.defaults.headers.common = {
 
         /**
          * setAuthenticatedUser
-         * 取得使用者資訊
+         * 設定使用者資訊
          * */
         setAuthenticatedUser: function setAuthenticatedUser(data) {
             authenticatedUser = data;
@@ -16076,7 +16077,8 @@ window.axios.defaults.headers.common = {
 
 
         /**
-         *
+         * getAuthenticatedUser
+         * 取得使用者資訊
          * */
         getAuthenticatedUser: function getAuthenticatedUser() {
             return authenticatedUser;
@@ -40045,13 +40047,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "hidden-xs"
-  }, [_vm._v(" 訪客 ")])]) : _vm._e(), _vm._v(" "), (!_vm.isAuth) ? _c('ul', {
+  }, [_vm._v(" " + _vm._s(_vm.authMessage.name) + " ")])]) : _vm._e(), _vm._v(" "), (!_vm.isAuth) ? _c('ul', {
     staticClass: "dropdown-menu"
-  }, [_vm._m(0), _vm._v(" "), _c('li', {
+  }, [_c('li', {
+    staticClass: "user-header"
+  }, [_c('img', {
+    staticClass: "img-circle",
+    attrs: {
+      "src": "/img/guest1-160x160.jpg",
+      "alt": "User Image"
+    }
+  }), _vm._v(" "), _c('p', [_vm._v("\n                " + _vm._s(_vm.authMessage.name) + "\n                "), _c('small', [_vm._v("歡迎加入")])])]), _vm._v(" "), _c('li', {
     staticClass: "user-body"
   }, [_c('div', {
     staticClass: "row"
-  }, [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c('div', {
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "col-xs-4 text-center"
   }, [_c('router-link', {
     attrs: {
@@ -40063,9 +40073,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-group"
-  }), _vm._v(" 團隊\n\n\n                        ")])])], 1)])]), _vm._v(" "), _c('li', {
+  }), _vm._v(" 團隊\n                        ")])])], 1)])]), _vm._v(" "), _c('li', {
     staticClass: "user-footer"
-  }, [_vm._m(3), _vm._v(" "), _c('div', {
+  }, [_vm._m(2), _vm._v(" "), _c('div', {
     staticClass: "pull-right"
   }, [_c('router-link', {
     attrs: {
@@ -40091,11 +40101,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "hidden-xs"
   }, [_vm._v(_vm._s(_vm.authMessage.name))])]) : _vm._e(), _vm._v(" "), (_vm.isAuth) ? _c('ul', {
     staticClass: "dropdown-menu"
-  }, [_vm._m(4), _vm._v(" "), _c('li', {
+  }, [_c('li', {
+    staticClass: "user-header"
+  }, [_c('img', {
+    staticClass: "img-circle",
+    attrs: {
+      "src": "/img/user2-160x160.jpg",
+      "alt": "User Image"
+    }
+  }), _vm._v(" "), _c('p', [_vm._v("\n                " + _vm._s(_vm.authMessage.name) + " - 瑜誠工業\n                "), _c('small', [_vm._v("員工 2017/03/12")])])]), _vm._v(" "), _c('li', {
     staticClass: "user-body"
   }, [_c('div', {
     staticClass: "row"
-  }, [_vm._m(5), _vm._v(" "), _c('div', {
+  }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "col-xs-4 text-center"
   }, [_c('router-link', {
     attrs: {
@@ -40121,7 +40139,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-copyright"
   }), _vm._v(" 版本\n                        ")])])], 1)])]), _vm._v(" "), _c('li', {
     staticClass: "user-footer"
-  }, [_vm._m(6), _vm._v(" "), _c('div', {
+  }, [_vm._m(4), _vm._v(" "), _c('div', {
     staticClass: "pull-right"
   }, [_c('a', {
     staticClass: "btn btn-default btn-flat",
@@ -40135,16 +40153,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "fa fa-sign-out"
   }), _vm._v(" 登出\n                ")])])])]) : _vm._e()])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
-    staticClass: "user-header"
-  }, [_c('img', {
-    staticClass: "img-circle",
-    attrs: {
-      "src": "/img/guest1-160x160.jpg",
-      "alt": "User Image"
-    }
-  }), _vm._v(" "), _c('p', [_vm._v("\n                訪客\n                "), _c('small', [_vm._v("歡迎加入12")])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-xs-4 text-center"
   }, [_c('a', {
@@ -40175,16 +40183,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('i', {
     staticClass: "fa fa-pencil"
   }), _vm._v(" 註冊\n                ")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
-    staticClass: "user-header"
-  }, [_c('img', {
-    staticClass: "img-circle",
-    attrs: {
-      "src": "/img/user2-160x160.jpg",
-      "alt": "User Image"
-    }
-  }), _vm._v(" "), _c('p', [_vm._v("\n                林政源 - 瑜誠工業\n                "), _c('small', [_vm._v("員工 2017/03/12")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-xs-4 text-center"

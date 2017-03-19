@@ -1,6 +1,4 @@
-<!-- 主要組件命名: FileName.vue-->
-<!-- 副要組件命名: SubName.vue -->
-<!-- 零件組件命名: _dropdownName.vue -->
+
 <!-- template -->
 <template>
     <li class="dropdown user user-menu">
@@ -8,7 +6,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
            v-if="!isAuth">
             <img src="/img/guest1-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs"> 訪客 </span>
+            <span class="hidden-xs"> {{ authMessage.name }} </span>
         </a>
         <ul class="dropdown-menu"
             v-if="!isAuth">
@@ -16,8 +14,8 @@
             <li class="user-header">
                 <img src="/img/guest1-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
-                    訪客
-                    <small>歡迎加入12</small>
+                    {{ authMessage.name }}
+                    <small>歡迎加入</small>
                 </p>
             </li>
             <!-- Menu Body -->
@@ -33,8 +31,6 @@
                         <router-link to="/team">
                             <a title="團隊">
                                 <i class="fa fa-group"></i> 團隊
-
-
                             </a>
                         </router-link>
                     </div>
@@ -58,6 +54,8 @@
 
             </li>
         </ul>
+
+
         <!-- User Account: style can be found in dropdown.less (isAuth)-->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
            v-if="isAuth">
@@ -71,7 +69,7 @@
             <li class="user-header">
                 <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
-                    林政源 - 瑜誠工業
+                    {{ authMessage.name }} - 瑜誠工業
                     <small>員工 2017/03/12</small>
 
                 </p>
@@ -125,12 +123,14 @@
         },
         components: {},
         methods   : {
+            /* 登出 */
             logout(){
                 //console.log('logout');
                 this.$auth.destroyToken()
                 this.$router.push('/oauth/login')
 
             },
+            /* 取出及設定使用者資訊 */
             setAuthenticatedUser(){
                 let self = this
                 axios.get('/api/user')
@@ -146,13 +146,15 @@
         },
         created(){
             console.log('4:parts|dropdownUser');
+            /* 判斷是否為使用者 */
             if (Vue.auth.isAuthenticated()) {
                 this.isAuth = true
+                this.setAuthenticatedUser()
             } else {
                 this.isAuth = false
             }
             if(this.isAuth){
-                this.setAuthenticatedUser()
+
             }
 
 
