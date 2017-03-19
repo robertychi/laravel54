@@ -21,7 +21,7 @@
 
                 </ul>
             </li>
-            <li class="footer"><a href="#">View all</a></li>
+            <li class="footer"><a href="#">共有 1 種語系</a></li>
         </ul>
     </li>
 </template>

@@ -18,6 +18,10 @@
         },
         components: {
             appHeader: Header
+        },
+        created(){
+            $('body').removeClass('login-page')
+            console.log('created:Landing.vue');
         }
     }
 </script>

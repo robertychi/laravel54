@@ -4,24 +4,25 @@
 <!-- template -->
 <template>
     <li class="dropdown user user-menu">
-        <!-- User Account: style can be found in dropdown.less(!isAuth)-->
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-           v-if="!isAuth">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="/img/guest1-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs"> 訪客 </span>
+            <span class="hidden-xs"> {{ isAuthData.name }} </span>
         </a>
-        <ul class="dropdown-menu"
-            v-if="!isAuth">
+        <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-                <img src="/img/guest1-160x160.jpg" class="img-circle" alt="User Image">
+                <img :src="isAuth ? 'YES' : '/img/guest1-160x160.jpg'" class="img-circle" alt="User Image">
                 <p>
-                    訪客
-                    <small>歡迎加入12</small>
+                    {{ isAuthData.name }}
+                    {{isAuth ? 'YES' : 'NO'}}
+                    <small>歡迎加入</small>
+
                 </p>
             </li>
+            <!-- 未登入狀態 (!isAuth)-->
             <!-- Menu Body -->
-            <li class="user-body">
+            <li class="user-body"
+                v-if="!isAuth">
                 <div class="row">
                     <div class="col-xs-4 text-center">
                         <a href="#"><i class="fa fa-facebook"></i> FB專頁</a>
@@ -33,8 +34,6 @@
                         <router-link to="/team">
                             <a title="團隊">
                                 <i class="fa fa-group"></i> 團隊
-
-
                             </a>
                         </router-link>
                     </div>
@@ -42,7 +41,8 @@
                 <!-- /.row -->
             </li>
             <!-- Menu Footer-->
-            <li class="user-footer">
+            <li class="user-footer"
+                v-if="!isAuth">
                 <div class="pull-left">
                     <a href="#" class="btn btn-default btn-flat">
                         <i class="fa fa-pencil"></i> 註冊
@@ -55,29 +55,11 @@
                         </a>
                     </router-link>
                 </div>
-
             </li>
-        </ul>
-        <!-- User Account: style can be found in dropdown.less (isAuth)-->
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-           v-if="isAuth">
-            <img src="/img/user2-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs">{{ authMessage.name }}</span>
-
-        </a>
-        <ul class="dropdown-menu"
-            v-if="isAuth">
-            <!-- User image -->
-            <li class="user-header">
-                <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                <p>
-                    林政源 - 瑜誠工業
-                    <small>員工 2017/03/12</small>
-
-                </p>
-            </li>
+            <!-- 登入狀態 (isAuth)-->
             <!-- Menu Body -->
-            <li class="user-body">
+            <li class="user-body"
+                v-if="isAuth">
                 <div class="row">
                     <div class="col-xs-4 text-center">
                         <a href="#"><i class="fa fa-facebook"></i> FB專頁</a>
@@ -98,7 +80,8 @@
                 <!-- /.row -->
             </li>
             <!-- Menu Footer-->
-            <li class="user-footer">
+            <li class="user-footer"
+                v-if="isAuth">
                 <div class="pull-left">
                     <a href="#" class="btn btn-default btn-flat">
                         <i class="fa fa-cog"></i> 設定
@@ -112,6 +95,7 @@
                 </div>
             </li>
         </ul>
+
     </li>
 </template>
 <!-- script -->
@@ -119,45 +103,41 @@
     export default{
         data(){
             return {
-                isAuth     : false,
-                authMessage: {'name': '訪客'}
+                isAuthData: '',
+                isAuth    : false
             }
         },
         components: {},
         methods   : {
             logout(){
-                //console.log('logout');
+
                 this.$auth.destroyToken()
                 this.$router.push('/oauth/login')
-
             },
             setAuthenticatedUser(){
                 let self = this
                 axios.get('/api/user')
                         .then(function (response) {
-                            self.$auth.setAuthenticatedUser(response.data)
-                            console.log(self.$auth.getAuthenticatedUser());
-                            self.authMessage = self.$auth.getAuthenticatedUser()
+                            console.log('response');
+
+                            self.isAuthData = response.data
                         })
                         .catch(function (error) {
-                            console.log('使用者連結有誤!!')
+                            console.log(error)
                         });
             }
         },
         created(){
-            console.log('parts|dropdownUser');
             if (Vue.auth.isAuthenticated()) {
                 this.isAuth = true
             } else {
                 this.isAuth = false
             }
 
-            this.setAuthenticatedUser()
-
-
         },
         mounted(){
-
+            console.log('esd');
+            this.setAuthenticatedUser()
         }
     }
 </script>

@@ -62,7 +62,7 @@
         },
         components: {
             appDropdownLanguages: DropdownLanguages,
-            appDropdownUsers: DropdownUsers
+            appDropdownUsers    : DropdownUsers
         },
         methods   : {
             logout(){
@@ -72,11 +72,15 @@
             }
         },
         created(){
+
             if (Vue.auth.isAuthenticated()) {
                 this.isAuth = true
             } else {
                 this.isAuth = false
             }
+
+        },
+        mounted(){
 
         }
     }

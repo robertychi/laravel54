@@ -8,7 +8,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
            v-if="!isAuth">
             <img src="/img/guest1-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs"> 訪客 </span>
+            <span class="hidden-xs"> {{isAuthData.name}} </span>
         </a>
         <ul class="dropdown-menu"
             v-if="!isAuth">
@@ -16,8 +16,9 @@
             <li class="user-header">
                 <img src="/img/guest1-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
-                    訪客
-                    <small>歡迎加入12</small>
+                    {{isAuthData.name}}
+                    <small>歡迎加入</small>
+
                 </p>
             </li>
             <!-- Menu Body -->
@@ -62,8 +63,7 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
            v-if="isAuth">
             <img src="/img/user2-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs">{{ authMessage.name }}</span>
-
+            <span class="hidden-xs">{{isAuthData.name}}</span>
         </a>
         <ul class="dropdown-menu"
             v-if="isAuth">
@@ -71,9 +71,8 @@
             <li class="user-header">
                 <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
-                    林政源 - 瑜誠工業
+                    {{isAuthData.name}} - 瑜誠工業
                     <small>員工 2017/03/12</small>
-
                 </p>
             </li>
             <!-- Menu Body -->
@@ -119,8 +118,8 @@
     export default{
         data(){
             return {
-                isAuth     : false,
-                authMessage: {'name': '訪客'}
+                isAuthData: '',
+                isAuth    : false
             }
         },
         components: {},
@@ -129,35 +128,34 @@
                 //console.log('logout');
                 this.$auth.destroyToken()
                 this.$router.push('/oauth/login')
-
             },
             setAuthenticatedUser(){
                 let self = this
-                axios.get('/api/user')
-                        .then(function (response) {
-                            self.$auth.setAuthenticatedUser(response.data)
-                            console.log(self.$auth.getAuthenticatedUser());
-                            self.authMessage = self.$auth.getAuthenticatedUser()
-                        })
-                        .catch(function (error) {
-                            console.log('使用者連結有誤!!')
-                        });
+                if (self.isAuth) {
+                    axios.get('/api/user')
+                            .then(function (response) {
+                                self.isAuthData = response.data
+                                console.log(response);
+                            })
+                            .catch(function (error) {
+                                console.log(error)
+                            });
+                } else {
+                    let data ={ "name":"訪客" }
+                    this.isAuthData = data
+
+                }
             }
         },
         created(){
-            console.log('parts|dropdownUser');
             if (Vue.auth.isAuthenticated()) {
                 this.isAuth = true
             } else {
                 this.isAuth = false
             }
-
             this.setAuthenticatedUser()
-
-
         },
         mounted(){
-
         }
     }
 </script>

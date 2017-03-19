@@ -11697,6 +11697,10 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 Vue.use(__WEBPACK_IMPORTED_MODULE_2_vee_validate___default.a);
 Vue.use(__WEBPACK_IMPORTED_MODULE_3__package_auth_auth_js__["a" /* default */]);
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken();
+
+//axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+
 router.beforeEach(function (to, from, next) {
     //頁面進入管控
     //取 routes.js 的 meta 值
@@ -13479,7 +13483,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__landing_layout_header_vue__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__landing_layout_header_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__landing_layout_header_vue__);
 //
@@ -13503,8 +13507,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     components: {
         appHeader: __WEBPACK_IMPORTED_MODULE_0__landing_layout_header_vue___default.a
+    },
+    created: function created() {
+        $('body').removeClass('login-page');
+        console.log('created:Landing.vue');
     }
 };
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
 
 /***/ }),
 /* 41 */
@@ -13668,6 +13677,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
@@ -13684,7 +13694,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var data = {
                 client_id: 2,
-                client_secret: "Vt5USrAkiLFYDugIovH1IhTyLLZL1UO2SCgnHEWn",
+                client_secret: "XE2UtOlY5LC0OJ61CPjSNd64YTcjgZM7zKvKFio1",
                 grant_type: 'password',
                 username: this.email,
                 password: this.password
@@ -13692,7 +13702,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/oauth/token', data).then(function (response) {
                 _this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
-                _this.$router.push('/dashboard');
+                window.location.href = '/';
+
+                //                            this.$router.push('/')
             }).catch(function (error) {
                 _this.isError = true;
             });
@@ -13700,7 +13712,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         isCancel: function isCancel() {
             this.isError = false;
         }
-    }
+    },
+    created: function created() {}
 };
 
 /***/ }),
@@ -14859,6 +14872,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -15382,7 +15400,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -15406,12 +15423,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
+
         if (Vue.auth.isAuthenticated()) {
             this.isAuth = true;
         } else {
             this.isAuth = false;
         }
-    }
+    },
+    mounted: function mounted() {}
 };
 
 /***/ }),
@@ -15865,11 +15884,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
         return {
-            isAuth: false
+            isAuth: false,
+            authMessage: { 'name': '訪客' }
         };
     },
 
@@ -15879,15 +15903,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //console.log('logout');
             this.$auth.destroyToken();
             this.$router.push('/oauth/login');
+        },
+        setAuthenticatedUser: function setAuthenticatedUser() {
+            var self = this;
+            axios.get('/api/user').then(function (response) {
+                self.$auth.setAuthenticatedUser(response.data);
+                console.log(self.$auth.getAuthenticatedUser());
+                self.authMessage = self.$auth.getAuthenticatedUser();
+            }).catch(function (error) {
+                console.log('使用者連結有誤!!');
+            });
         }
     },
     created: function created() {
+        console.log('parts|dropdownUser');
         if (Vue.auth.isAuthenticated()) {
             this.isAuth = true;
         } else {
             this.isAuth = false;
         }
-    }
+
+        this.setAuthenticatedUser();
+    },
+    mounted: function mounted() {}
 };
 
 /***/ }),
@@ -15955,8 +15993,9 @@ window.axios.defaults.headers.common = {
  * */
 
 /* harmony default export */ __webpack_exports__["a"] = function (Vue) {
-    Vue.auth = {
+    var authenticatedUser = {};
 
+    Vue.auth = {
         //set token
         setToken: function setToken(token, expiration) {
             //存 token 到 localStorage，登入
@@ -15982,16 +16021,39 @@ window.axios.defaults.headers.common = {
             }
         },
 
-        //destory token
+        /**
+         * destory token
+         * 刪除 Token 在 localStorage 資料
+         * 回覆訪客身份
+         */
         destroyToken: function destroyToken() {
             localStorage.removeItem('token');
             localStorage.removeItem('expiration');
         },
 
 
-        //isAuthenticated
+        /**
+         * isAuthenticated
+         * 回傳是否為使用者(true)或訪客(false)
+         */
         isAuthenticated: function isAuthenticated() {
             if (this.getToken()) return true;else return false;
+        },
+
+        /**
+         * setAuthenticatedUser
+         * 取得使用者資訊
+         * */
+        setAuthenticatedUser: function setAuthenticatedUser(data) {
+            authenticatedUser = data;
+        },
+
+
+        /**
+         *
+         * */
+        getAuthenticatedUser: function getAuthenticatedUser() {
+            return authenticatedUser;
         }
     };
     Object.defineProperties(Vue.prototype, {
@@ -16039,6 +16101,8 @@ window.axios.defaults.headers.common = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_NotFound_vue__ = __webpack_require__(86);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_NotFound_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_NotFound_vue__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return routes; });
+
+
 /* routes root */
 
 
@@ -39955,7 +40019,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "hidden-xs"
-  }, [_vm._v("訪客")])]) : _vm._e(), _vm._v(" "), (!_vm.isAuth) ? _c('ul', {
+  }, [_vm._v(" 訪客 ")])]) : _vm._e(), _vm._v(" "), (!_vm.isAuth) ? _c('ul', {
     staticClass: "dropdown-menu"
   }, [_vm._m(0), _vm._v(" "), _c('li', {
     staticClass: "user-body"
@@ -39973,7 +40037,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-group"
-  }), _vm._v(" 團隊\n                        ")])])], 1)])]), _vm._v(" "), _c('li', {
+  }), _vm._v(" 團隊\n\n\n                        ")])])], 1)])]), _vm._v(" "), _c('li', {
     staticClass: "user-footer"
   }, [_vm._m(3), _vm._v(" "), _c('div', {
     staticClass: "pull-right"
@@ -39999,7 +40063,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('span', {
     staticClass: "hidden-xs"
-  }, [_vm._v("林政源")])]) : _vm._e(), _vm._v(" "), (_vm.isAuth) ? _c('ul', {
+  }, [_vm._v(_vm._s(_vm.authMessage.name))])]) : _vm._e(), _vm._v(" "), (_vm.isAuth) ? _c('ul', {
     staticClass: "dropdown-menu"
   }, [_vm._m(4), _vm._v(" "), _c('li', {
     staticClass: "user-body"
@@ -40053,7 +40117,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": "/img/guest1-160x160.jpg",
       "alt": "User Image"
     }
-  }), _vm._v(" "), _c('p', [_vm._v("\n                訪客\n                "), _c('small', [_vm._v("歡迎加入")])])])
+  }), _vm._v(" "), _c('p', [_vm._v("\n                訪客\n                "), _c('small', [_vm._v("歡迎加入12")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "col-xs-4 text-center"
@@ -41089,7 +41153,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "#"
     }
-  }, [_vm._v("View all")])])])])
+  }, [_vm._v("共有 1 種語系")])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -42036,23 +42100,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('i', {
     staticClass: "fa fa-question-circle-o"
-  }), _vm._v(" 忘記密碼？")]), _vm._v(" "), _c('br'), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('br'), _vm._v(" "), _c('router-link', {
+  }), _vm._v(" 忘記密碼？")]), _vm._v(" "), _c('br'), _vm._v(" "), _c('router-link', {
+    attrs: {
+      "to": "/oauth/register"
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-registered"
+  }), _vm._v(" 註冊")]), _vm._v(" "), _c('br'), _vm._v(" "), _c('router-link', {
     attrs: {
       "to": "/"
     }
   }, [_c('i', {
     staticClass: "fa fa-home"
   }), _vm._v(" 回首頁")])], 1)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('a', {
-    staticClass: "text-center",
-    attrs: {
-      "href": "register.html"
-    }
-  }, [_c('i', {
-    staticClass: "fa fa-registered"
-  }), _vm._v(" 註冊")])
-}]}
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

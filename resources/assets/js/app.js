@@ -30,6 +30,9 @@ Vue.use(VueRouter)
 Vue.use(VeeValidate)
 Vue.use(Auth)
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
+
+//axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 
 router.beforeEach((to, from, next) => {
     //頁面進入管控

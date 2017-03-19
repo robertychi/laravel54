@@ -25,7 +25,6 @@
         },
         created(){
             $('body').addClass('login-page')
-
         }
     }
 

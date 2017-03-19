@@ -30,6 +30,7 @@
                         {{ errors.first('email') }}
                     </span>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+
                 </div>
 
                 <div class="form-group has-feedback">
@@ -71,8 +72,8 @@
                    :class="{'text-danger': isError }">
                     <i class="fa fa-question-circle-o"></i> 忘記密碼？</a>
                 <br>
-
-                <a href="register.html" class="text-center"><i class="fa fa-registered"></i> 註冊</a>
+                <router-link to="/oauth/register"><i class="fa fa-registered"></i> 註冊</router-link>
+                <!--<a href="register" class="text-center"><i class="fa fa-registered"></i> 註冊</a>-->
                 <br>
 
                 <router-link to="/"><i class="fa fa-home"></i> 回首頁</router-link>
@@ -97,7 +98,7 @@
             login(){
                 var data = {
                     client_id    : 2,
-                    client_secret: "Vt5USrAkiLFYDugIovH1IhTyLLZL1UO2SCgnHEWn",
+                    client_secret: "XE2UtOlY5LC0OJ61CPjSNd64YTcjgZM7zKvKFio1",
                     grant_type   : 'password',
                     username     : this.email,
                     password     : this.password
@@ -106,7 +107,9 @@
                 axios.post('/oauth/token', data)
                         .then(response => {
                             this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now())
-                            this.$router.push('/dashboard')
+                            window.location.href = '/'
+
+//                            this.$router.push('/')
                         })
                         .catch(error => {
                             this.isError = true
@@ -115,6 +118,8 @@
             isCancel(){
                 this.isError = false
             }
+        },
+        created(){
 
         }
     }
