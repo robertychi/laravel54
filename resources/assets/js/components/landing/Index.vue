@@ -16,9 +16,13 @@
                 titleName: '首頁'
             }
         },
+        created(){
+            console.log('2:page|Landing|index');
+        },
         mounted(){
             document.title = this.titleName
         }
+
     }
 </script>
 

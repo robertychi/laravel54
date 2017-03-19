@@ -13,6 +13,9 @@
                 titleName: '產品介紹'
             }
         },
+        created(){
+            console.log('2:page|Landing|product');
+        },
         mounted(){
             document.title = this.titleName
         }

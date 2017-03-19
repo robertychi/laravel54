@@ -20,8 +20,9 @@
             appHeader: Header
         },
         created(){
+            console.log('1:main|Landing');
             $('body').removeClass('login-page')
-            console.log('created:Landing.vue');
+
         }
     }
 </script>

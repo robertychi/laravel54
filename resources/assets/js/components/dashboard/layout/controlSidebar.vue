@@ -203,12 +203,13 @@
 <script type="es6">
     export default{
         data(){
-            return{
-                msg:'hello vue'
+            return {
+                msg: 'hello vue'
             }
         },
-        components:{
-           
+        components: {},
+        created(){
+            console.log('3:layout|Dashboard|Sidebar');
         }
     }
 </script>

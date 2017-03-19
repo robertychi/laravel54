@@ -260,9 +260,12 @@
         computed:{
 
         },
+        created(){
+            console.log('3:layout|Dashboard|mainSidebar');
+        },
+
         mounted(){
 
-            console.log('mounted:mainSidebar.vue');
         }
         
     }

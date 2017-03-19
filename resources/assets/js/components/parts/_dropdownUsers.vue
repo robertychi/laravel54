@@ -145,14 +145,16 @@
             }
         },
         created(){
-            console.log('parts|dropdownUser');
+            console.log('4:parts|dropdownUser');
             if (Vue.auth.isAuthenticated()) {
                 this.isAuth = true
             } else {
                 this.isAuth = false
             }
+            if(this.isAuth){
+                this.setAuthenticatedUser()
+            }
 
-            this.setAuthenticatedUser()
 
 
         },

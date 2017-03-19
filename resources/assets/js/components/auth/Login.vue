@@ -107,7 +107,7 @@
                 axios.post('/oauth/token', data)
                         .then(response => {
                             this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now())
-                            window.location.href = '/'
+                            window.location.href = '/dashboard'
 
 //                            this.$router.push('/')
                         })

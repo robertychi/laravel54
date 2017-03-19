@@ -13,8 +13,8 @@
                 titleName: '聯絡我們'
             }
         },
-        mounted(){
-            document.title = this.titleName
+        created(){
+            console.log('2:page|Landing|contact');
         }
     }
 </script>

@@ -13,8 +13,8 @@
                 titleName: '技術資料'
             }
         },
-        mounted(){
-            document.title = this.titleName
+        created(){
+            console.log('2:page|Landing|document');
         }
     }
 </script>

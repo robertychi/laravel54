@@ -13,6 +13,9 @@
 				titleName: '關於我們'
 			}
 		},
+		created(){
+			console.log('2:page|Landing|Team');
+		},
 		mounted(){
 			document.title = this.titleName
 		}

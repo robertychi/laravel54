@@ -13473,7 +13473,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {},
     beforeCreate: function beforeCreate() {},
-    created: function created() {},
+    created: function created() {
+        console.log('1:main|Dashboard');
+    },
     beforeMount: function beforeMount() {},
     mounted: function mounted() {}
 };
@@ -13509,8 +13511,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         appHeader: __WEBPACK_IMPORTED_MODULE_0__landing_layout_header_vue___default.a
     },
     created: function created() {
+        console.log('1:main|Landing');
         $('body').removeClass('login-page');
-        console.log('created:Landing.vue');
     }
 };
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
@@ -13702,7 +13704,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/oauth/token', data).then(function (response) {
                 _this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now());
-                window.location.href = '/';
+                window.location.href = '/dashboard';
 
                 //                            this.$router.push('/')
             }).catch(function (error) {
@@ -14370,6 +14372,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             titleName: '首頁'
         };
     },
+    created: function created() {
+        console.log('2:page|dashboard|index');
+    },
     mounted: function mounted() {
         document.title = this.titleName;
     }
@@ -14811,7 +14816,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    components: {}
+    components: {},
+    created: function created() {
+        console.log('3:layout|Dashboard|Sidebar');
+    }
 };
 
 /***/ }),
@@ -14890,6 +14898,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             msg: 'hello vue'
         };
     },
+    created: function created() {
+        console.log('3:layout|Dashboard|header');
+    },
 
     components: {
         appDropdownMessages: __WEBPACK_IMPORTED_MODULE_0__parts_dropdownMessages_vue___default.a,
@@ -14921,6 +14932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
@@ -14929,7 +14941,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    components: {}
+    components: {},
+
+    created: function created() {
+        console.log('3:layout|Dashboard|mainFooter');
+    }
 };
 
 /***/ }),
@@ -15199,10 +15215,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {},
     components: {},
     computed: {},
-    mounted: function mounted() {
-
-        console.log('mounted:mainSidebar.vue');
-    }
+    created: function created() {
+        console.log('3:layout|Dashboard|mainSidebar');
+    },
+    mounted: function mounted() {}
 };
 
 /***/ }),
@@ -15226,8 +15242,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             titleName: '聯絡我們'
         };
     },
-    mounted: function mounted() {
-        document.title = this.titleName;
+    created: function created() {
+        console.log('2:page|Landing|contact');
     }
 };
 
@@ -15252,8 +15268,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             titleName: '技術資料'
         };
     },
-    mounted: function mounted() {
-        document.title = this.titleName;
+    created: function created() {
+        console.log('2:page|Landing|document');
     }
 };
 
@@ -15281,6 +15297,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             titleName: '首頁'
         };
     },
+    created: function created() {
+        console.log('2:page|Landing|index');
+    },
     mounted: function mounted() {
         document.title = this.titleName;
     }
@@ -15307,6 +15326,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             titleName: '產品介紹'
         };
     },
+    created: function created() {
+        console.log('2:page|Landing|product');
+    },
     mounted: function mounted() {
         document.title = this.titleName;
     }
@@ -15332,6 +15354,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		return {
 			titleName: '關於我們'
 		};
+	},
+	created: function created() {
+		console.log('2:page|Landing|Team');
 	},
 	mounted: function mounted() {
 		document.title = this.titleName;
@@ -15916,14 +15941,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        console.log('parts|dropdownUser');
+        console.log('4:parts|dropdownUser');
         if (Vue.auth.isAuthenticated()) {
             this.isAuth = true;
         } else {
             this.isAuth = false;
         }
-
-        this.setAuthenticatedUser();
+        if (this.isAuth) {
+            this.setAuthenticatedUser();
+        }
     },
     mounted: function mounted() {}
 };
@@ -40234,11 +40260,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "main-footer"
   }, [_c('div', {
     staticClass: "pull-right hidden-xs"
-  }, [_c('b', [_vm._v("Version")]), _vm._v(" 2.3.8\r\n        ")]), _vm._v(" "), _c('strong', [_vm._v("\r\n                Copyright © 2014-2016 "), _c('a', {
+  }, [_c('b', [_vm._v("Version")]), _vm._v(" 2.3.8\n        ")]), _vm._v(" "), _c('strong', [_vm._v("\n            Copyright © 2014-2016 "), _c('a', {
     attrs: {
       "href": "http://almsaeedstudio.com"
     }
-  }, [_vm._v("Almsaeed Studio")]), _vm._v(".")]), _vm._v(" All rights reserved.\r\n    ")])])
+  }, [_vm._v("Almsaeed Studio")]), _vm._v(".")]), _vm._v(" All rights\n                                                                                                         reserved.\n    ")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
