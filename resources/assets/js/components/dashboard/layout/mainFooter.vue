@@ -25,7 +25,6 @@
         },
 
         created(){
-            console.log('3:layout|Dashboard|mainFooter');
         }
 
 

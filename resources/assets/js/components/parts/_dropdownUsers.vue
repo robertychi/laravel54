@@ -70,7 +70,7 @@
                 <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
                     {{ authMessage.name }} - 瑜誠工業
-                    <small>員工 2017/03/12</small>
+                    <small>{{ authMessage.email }}</small>
 
                 </p>
             </li>
@@ -136,7 +136,7 @@
                 axios.get('/api/user')
                         .then(function (response) {
                             self.$auth.setAuthenticatedUser(response.data)
-                            console.log(self.$auth.getAuthenticatedUser());
+//                            console.log(self.$auth.getAuthenticatedUser());
                             self.authMessage = self.$auth.getAuthenticatedUser()
                         })
                         .catch(function (error) {
@@ -145,7 +145,6 @@
             }
         },
         created(){
-            console.log('4:parts|dropdownUser');
             /* 判斷是否為使用者 */
             if (Vue.auth.isAuthenticated()) {
                 this.isAuth = true

@@ -86,6 +86,8 @@ function lessToCss() {
 function vueApp() {
     mix.js(jsDir + 'app.js', publicJsDir)
         .sass(sassDir + 'app.sass', publicCssDir );
+
+//    mix.js(jsDir + 'app.js', publicJsDir);
 }
 
 
@@ -99,7 +101,7 @@ function webpackfunction() {
     mix.webpackConfig({
         plugins: [
             new BrowserSyncPlugin({
-                open : 'external',
+//                open : 'external',
                 host : 'localhost',
                 port : 5000,
                 proxy: 'localhost:8000',
@@ -177,8 +179,12 @@ function copyToPublic() {
 //    mix.copy(npmDir + 'ionicons/dist/css/ionicons.min.css.map', publicCssDir);
 //    mix.copy(npmDir + 'ionicons/dist/fonts', publicFontDir);
 
-    /* animate.css */
-    mix.copy(npmDir + 'animate.css/animate.min.css', publicCssDir);
+    /* animate.css
+    *  原始的版本，效果比較不好可以到以網址去捉取
+    *  http://webapplayers.com/inspinia_admin-v2.7/css/animate.css
+    *
+    * */
+//    mix.copy(npmDir + 'animate.css/animate.min.css', publicCssDir);
 
     /* ****************************************************
      * include Jquery plugins

@@ -38,7 +38,7 @@
 
         },
         created() {
-            console.log('1:main|Dashboard');
+
         },
         beforeMount() {
 

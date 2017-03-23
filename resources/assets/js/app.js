@@ -23,6 +23,7 @@ import { routes } from './routes'
 
 const router = new VueRouter({
     routes,
+//    linkActiveClass: 'active',
     mode: 'history'
 });
 
@@ -57,7 +58,6 @@ router.beforeEach((to, from, next) => {
     else next()
 })
 
-//Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
 const app = new Vue({
     el    : '#app',

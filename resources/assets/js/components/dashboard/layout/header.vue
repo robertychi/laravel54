@@ -60,7 +60,6 @@
             }
         },
         created(){
-            console.log('3:layout|Dashboard|header');
         },
         components: {
             appDropdownMessages: DropdownMessages,

@@ -568,7 +568,7 @@
             }
         },
         created(){
-            console.log('2:page|dashboard|index');
+
         },
         mounted(){
             document.title = this.titleName

@@ -19,7 +19,7 @@
 </script>
 <style lang="stylus" scoped>
     @import "/css/app.css"
-    @import "/css/animate.min.css"
+    @import "/css/animate.css"
     @import "/css/font-awesome.min.css"
     @import "/plugins/ionicons/css/ionicons.min.css"
     /* AdminLTE Css*/

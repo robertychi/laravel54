@@ -42,10 +42,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 
-//$factory->define(App\Product::class, function (Faker\Generator $faker) {
-//    return [
-//        'name' => $faker->word,
-//        'price' => $faker->randomFloat(2,1,100),
-//        'description' => $faker->paragraph(rand),
-//    ];
-//});
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        'number'=> $faker->numberBetween(1,30),
+        'name' => $faker->word,
+        'price' => $faker->randomFloat(2,1,100),
+        'description' => $faker->paragraph(rand(5,10)),
+    ];
+});

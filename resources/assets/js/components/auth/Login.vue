@@ -7,7 +7,7 @@
 
             </div>
             <!-- /.login-logo -->
-            <div class="login-box-body">
+            <div class="login-box-body animated fadeInDown">
                 <p class="login-box-msg">請登入</p>
                 <div class="alert alert-danger"
                      v-if="isError">
@@ -98,7 +98,7 @@
             login(){
                 var data = {
                     client_id    : 2,
-                    client_secret: "XE2UtOlY5LC0OJ61CPjSNd64YTcjgZM7zKvKFio1",
+                    client_secret: "qlYgvtu1PQrxfODBHxhCT10i7WDpZA8hXeXeQIVT",
                     grant_type   : 'password',
                     username     : this.email,
                     password     : this.password

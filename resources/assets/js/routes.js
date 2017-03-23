@@ -1,5 +1,3 @@
-
-
 /* routes root */
 import Landing from './components/Landing.vue'
 import Dashboard from './components/Dashboard.vue'
@@ -16,6 +14,18 @@ import Contact from './components/landing/Contact.vue'
 import DashboardIndex from './components/dashboard/Index.vue'
 import DashboardIndex2 from './components/dashboard/Index2.vue'
 import DashboardIndex3 from './components/dashboard/Index3.vue'
+/* Dashboard Product*/
+import DashboardProduct from './components/dashboard/product/Product.vue'
+import DashboardProductClass from './components/dashboard/product/ProductClass.vue'
+
+/* Dashboard Customer*/
+import DashboardCustomer from './components/dashboard/customer/Customer.vue'
+import DashboardCustomerClass from './components/dashboard/customer/CustomerClass.vue'
+
+
+/* Dashboard Supply*/
+import DashboardSupply from './components/dashboard/supply/Supply.vue'
+
 
 /* Auth Page */
 import Login from './components/auth/Login.vue'
@@ -33,9 +43,7 @@ export const routes = [
     {
         path     : '',
         component: Landing,
-        meta:{
-
-        },
+        meta     : {},
         children : [
             {path: '', component: Index, name: 'landing '},
             {path: 'team', component: Team, name: 'team'},
@@ -49,13 +57,21 @@ export const routes = [
     {
         path     : '/dashboard',
         component: Dashboard,
-        meta:{
-            isAuth : true
+        meta     : {
+            isAuth: true
         },
         children : [
+            /* dashboard */
             {path: '', component: DashboardIndex},
             {path: 'v2', component: DashboardIndex2},
             {path: 'v3', component: DashboardIndex3},
+            /* product */
+            {path: 'product', component: DashboardProduct},
+            { path: 'productClass', component: DashboardProductClass },
+            /* customer */
+            {path: 'customer', component: DashboardCustomer},
+            { path: 'customerClass', component: DashboardCustomerClass },
+            {path: 'supply', component: DashboardSupply},
             /* AdminLTE*/
             {path: 'examples-blank-page', component: ExamplesBlankPage}
         ]
@@ -80,10 +96,11 @@ export const routes = [
     },
 
 
-
     /* Path 404 page*/
     {
         path     : '*',
         component: NotFound
     }
+
+
 ];

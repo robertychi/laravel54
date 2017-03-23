@@ -209,7 +209,7 @@
         },
         components: {},
         created(){
-            console.log('3:layout|Dashboard|Sidebar');
+
         }
     }
 </script>

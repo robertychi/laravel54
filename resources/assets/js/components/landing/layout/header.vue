@@ -66,7 +66,7 @@
         },
         methods   : {
             logout(){
-                //console.log('logout');
+
                 this.$auth.destroyToken()
                 this.$router.push('/oauth/login')
             }
